@@ -1,8 +1,7 @@
 package br.com.bhnicoletti.ProjetoSWAPI.api.controller;
 
 import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.FilmeDTO;
-import br.com.bhnicoletti.ProjetoSWAPI.domain.model.Film;
-import br.com.bhnicoletti.ProjetoSWAPI.domain.model.ListFilm;
+import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.ListaFilmeDTO;
 import br.com.bhnicoletti.ProjetoSWAPI.domain.service.FilmesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,7 @@ public class FilmesController {
     private FilmesService filmesService;
 
     @GetMapping
-    public List<Film> listarFilmes(){
+    public ListaFilmeDTO listarFilmes(){
         return filmesService.listar();
     }
 

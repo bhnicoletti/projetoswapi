@@ -1,2 +1,15 @@
-package br.com.bhnicoletti.ProjetoSWAPI.domain.dto;public class ListaFilmeDTO {
+package br.com.bhnicoletti.ProjetoSWAPI.domain.dto;
+
+import br.com.bhnicoletti.ProjetoSWAPI.domain.model.Film;
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+public class ListaFilmeDTO {
+    private Integer contagem;
+    private Integer proximo;
+    private Integer anterior;
+    private List<FilmeDTO> resultado = new ArrayList<>();
 }
