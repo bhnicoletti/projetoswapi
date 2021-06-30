@@ -7,5 +7,8 @@ import java.util.List;
 
 @Data
 public class ListFilm {
-    private List<Film> films = new ArrayList<>();
+    private Integer count;
+    private Integer next;
+    private Integer previous;
+    private List<Film> results = new ArrayList<>();
 }

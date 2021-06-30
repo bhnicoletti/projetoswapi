@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
 
 @Service
@@ -19,7 +18,7 @@ public class FilmesService {
     public List<Film> listar(){
         RestTemplate restTemplate = new RestTemplate();
         ListFilm response = restTemplate.getForObject("https://swapi.dev/api/films",ListFilm.class);
-        List<Film> films = response.getFilms();
+        List<Film> films = response.getResults();
         return films;
     }
 
