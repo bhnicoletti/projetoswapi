@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UsuarioService implements UserDetailsService {
 
@@ -52,10 +50,12 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
+        String[] roles = new String[]{"USER"};
+
         return User.builder()
                 .username(usuario.getLogin())
                 .password(usuario.getSenha())
-                .roles("USER")
+                .roles(roles)
                 .build();
     }
 

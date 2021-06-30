@@ -16,15 +16,20 @@ public class PessoaService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ListaPessoaDTO listar(){
-        RestTemplate restTemplate = new RestTemplate();
-        ListPeople response = restTemplate.getForObject("https://swapi.dev/api/people",ListPeople.class);
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public ListaPessoaDTO listar(Integer pag){
+        var url = "https://swapi.dev/api/people/";
+        if(pag != null){
+            url += "?page="+pag;
+        }
+        ListPeople response = restTemplate.getForObject(url,ListPeople.class);
         ListaPessoaDTO pessoas = modelMapper.map(response, ListaPessoaDTO.class);
         return pessoas;
     }
 
     public PessoaDTO buscar(Integer id){
-        RestTemplate restTemplate = new RestTemplate();
         String url = "https://swapi.dev/api/people/" + id;
         People people = restTemplate.getForObject(url,People.class);
         return modelMapper.map(people, PessoaDTO.class);

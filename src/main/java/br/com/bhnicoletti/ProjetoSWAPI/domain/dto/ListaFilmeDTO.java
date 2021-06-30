@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class ListaFilmeDTO {
     private Integer contagem;
-    private Integer proximo;
-    private Integer anterior;
+    private String proximo;
+    private String anterior;
     private List<FilmeDTO> resultado = new ArrayList<>();
 }

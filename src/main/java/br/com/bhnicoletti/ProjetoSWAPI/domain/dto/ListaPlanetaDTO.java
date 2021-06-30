@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class ListaPlanetaDTO {
     private Integer contagem;
-    private Integer proximo;
-    private Integer anterior;
+    private String proximo;
+    private String anterior;
     private List<PlanetaDTO> resultado = new ArrayList<>();
 }

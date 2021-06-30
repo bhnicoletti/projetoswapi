@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class ListPlanet {
     private Integer count;
-    private Integer next;
-    private Integer previous;
+    private String next;
+    private String previous;
     private List<Planet> results = new ArrayList<>();
 }

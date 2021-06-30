@@ -15,15 +15,16 @@ public class FilmesService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     public ListaFilmeDTO listar(){
-        RestTemplate restTemplate = new RestTemplate();
         ListFilm response = restTemplate.getForObject("https://swapi.dev/api/films",ListFilm.class);
         ListaFilmeDTO filmes = modelMapper.map(response, ListaFilmeDTO.class);
         return filmes;
     }
 
     public FilmeDTO buscar(Integer id){
-        RestTemplate restTemplate = new RestTemplate();
         String url = "https://swapi.dev/api/films/" + id;
         Film filme = restTemplate.getForObject(url,Film.class);
         return modelMapper.map(filme, FilmeDTO.class);

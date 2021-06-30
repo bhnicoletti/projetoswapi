@@ -50,9 +50,9 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .antMatchers("/pessoas/**")
-                .hasAnyRole("USER")
+                .permitAll()
                 .antMatchers("/planetas/**")
-                .hasAnyRole("USER")
+                .permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }
