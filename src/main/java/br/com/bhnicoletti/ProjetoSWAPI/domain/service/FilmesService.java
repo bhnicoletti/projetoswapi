@@ -7,7 +7,9 @@ import br.com.bhnicoletti.ProjetoSWAPI.domain.model.ListFilm;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
 
 @Service
 public class FilmesService {
@@ -23,9 +25,13 @@ public class FilmesService {
         if(pag != null){
             url += "?page="+pag;
         }
-        ListFilm film = restTemplate.getForObject(url, ListFilm.class);
 
-        return film.converter(modelMapper);
+        try {
+            ListFilm films = restTemplate.getForObject(url, ListFilm.class);
+            return films.converter(modelMapper);
+        } catch (HttpClientErrorException ex){
+            return new ListaFilmeDTO();
+        }
     }
 
     public FilmeDTO buscar(Integer id){

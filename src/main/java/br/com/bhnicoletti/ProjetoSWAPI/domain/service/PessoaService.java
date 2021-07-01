@@ -1,6 +1,5 @@
 package br.com.bhnicoletti.ProjetoSWAPI.domain.service;
 
-
 import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.ListaPessoaDTO;
 import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.PessoaDTO;
 import br.com.bhnicoletti.ProjetoSWAPI.domain.model.ListPeople;
@@ -8,6 +7,7 @@ import br.com.bhnicoletti.ProjetoSWAPI.domain.model.People;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -24,8 +24,12 @@ public class PessoaService {
         if(pag != null){
             url += "?page="+pag;
         }
-        ListPeople peoples = restTemplate.getForObject(url,ListPeople.class);
-        return peoples.converter(modelMapper);
+        try {
+            ListPeople peoples = restTemplate.getForObject(url,ListPeople.class);
+            return peoples.converter(modelMapper);
+        } catch (HttpClientErrorException ex){
+            return new ListaPessoaDTO();
+        }
     }
 
     public PessoaDTO buscar(Integer id){
