@@ -4,12 +4,8 @@ import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.FilmeDTO;
 import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.ListaFilmeDTO;
 import br.com.bhnicoletti.ProjetoSWAPI.domain.service.FilmesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/filmes")
@@ -19,8 +15,8 @@ public class FilmesController {
     private FilmesService filmesService;
 
     @GetMapping
-    public ListaFilmeDTO listarFilmes(){
-        return filmesService.listar();
+    public ListaFilmeDTO listarFilmes(@RequestParam(required = false) Integer pag){
+        return filmesService.listar(pag);
     }
 
     @GetMapping("/{id}")

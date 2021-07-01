@@ -22,9 +22,8 @@ public class PlanetaService {
         if(pag != null){
             url += "?page="+pag;
         }
-        ListPlanet response = restTemplate.getForObject(url,ListPlanet.class);
-        ListaPlanetaDTO planetas = modelMapper.map(response, ListaPlanetaDTO.class);
-        return planetas;
+        ListPlanet planets = restTemplate.getForObject(url,ListPlanet.class);
+        return planets.converter(modelMapper);
     }
 
     public PlanetaDTO buscar(Integer id){

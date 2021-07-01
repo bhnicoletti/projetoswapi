@@ -48,10 +48,9 @@ public class UsuarioService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário não encontrado"));
 
         String[] roles = new String[]{"USER"};
-
         return User.builder()
                 .username(usuario.getLogin())
                 .password(usuario.getSenha())

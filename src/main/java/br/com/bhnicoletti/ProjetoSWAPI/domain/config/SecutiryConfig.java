@@ -45,14 +45,13 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/usuarios/**")
-                .permitAll()
-                .antMatchers(HttpMethod.GET,"/filmes/**")
-                .permitAll()
-
+                    .permitAll()
+                .antMatchers("/filmes/**")
+                    .hasAnyRole("USER")
                 .antMatchers("/pessoas/**")
-                .permitAll()
+                    .hasAnyRole("USER")
                 .antMatchers("/planetas/**")
-                .permitAll()
+                    .hasAnyRole("USER")
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }

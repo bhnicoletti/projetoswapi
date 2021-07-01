@@ -18,15 +18,21 @@ public class FilmesService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public ListaFilmeDTO listar(){
-        ListFilm response = restTemplate.getForObject("https://swapi.dev/api/films",ListFilm.class);
-        ListaFilmeDTO filmes = modelMapper.map(response, ListaFilmeDTO.class);
-        return filmes;
+    public ListaFilmeDTO listar(Integer pag){
+        var url = "https://swapi.dev/api/films/";
+        if(pag != null){
+            url += "?page="+pag;
+        }
+        ListFilm film = restTemplate.getForObject(url, ListFilm.class);
+
+        return film.converter(modelMapper);
     }
 
     public FilmeDTO buscar(Integer id){
         String url = "https://swapi.dev/api/films/" + id;
         Film filme = restTemplate.getForObject(url,Film.class);
-        return modelMapper.map(filme, FilmeDTO.class);
+        return filme.converter(modelMapper);
     }
+
+
 }

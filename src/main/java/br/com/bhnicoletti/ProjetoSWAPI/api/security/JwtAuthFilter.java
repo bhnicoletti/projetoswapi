@@ -2,6 +2,7 @@ package br.com.bhnicoletti.ProjetoSWAPI.api.security;
 
 import br.com.bhnicoletti.ProjetoSWAPI.domain.service.UsuarioService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -32,12 +33,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if (isValid){
                 String loginUser = jwtService.obterLogin(token);
-                System.out.println(loginUser);
+
                 UserDetails userDetails = usuarioService.loadUserByUsername(loginUser);
 
                 UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(userDetails,null, userDetails.getAuthorities());
                 user.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-
+                SecurityContextHolder.getContext().setAuthentication(user);
             }
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);

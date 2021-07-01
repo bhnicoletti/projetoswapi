@@ -1,6 +1,5 @@
 package br.com.bhnicoletti.ProjetoSWAPI.domain.dto;
 
-import br.com.bhnicoletti.ProjetoSWAPI.domain.model.Film;
 import lombok.Data;
 
 import java.util.ArrayList;

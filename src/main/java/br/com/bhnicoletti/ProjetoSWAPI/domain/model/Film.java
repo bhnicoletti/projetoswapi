@@ -1,12 +1,15 @@
 package br.com.bhnicoletti.ProjetoSWAPI.domain.model;
 
+import br.com.bhnicoletti.ProjetoSWAPI.domain.dto.FilmeDTO;
+import br.com.bhnicoletti.ProjetoSWAPI.domain.util.Convertible;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class Film {
+public class Film implements Convertible<FilmeDTO> {
     private String title;
     private Integer episode_id;
     private String opening_crawl;
@@ -21,4 +24,9 @@ public class Film {
     private String created;
     private String edited;
     private String url;
+
+    @Override
+    public FilmeDTO converter(ModelMapper modelMapper) {
+        return modelMapper.map(this, FilmeDTO.class);
+    }
 }

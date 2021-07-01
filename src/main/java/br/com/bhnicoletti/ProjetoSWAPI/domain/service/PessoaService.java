@@ -24,9 +24,8 @@ public class PessoaService {
         if(pag != null){
             url += "?page="+pag;
         }
-        ListPeople response = restTemplate.getForObject(url,ListPeople.class);
-        ListaPessoaDTO pessoas = modelMapper.map(response, ListaPessoaDTO.class);
-        return pessoas;
+        ListPeople peoples = restTemplate.getForObject(url,ListPeople.class);
+        return peoples.converter(modelMapper);
     }
 
     public PessoaDTO buscar(Integer id){
